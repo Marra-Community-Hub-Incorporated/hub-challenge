@@ -1,0 +1,9 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet-isolated",
+    "AzureWebJobsStorage": "DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;BlobEndpoint=http://127.0.0.1:11000/devstoreaccount1;QueueEndpoint=http://127.0.0.1:11001/devstoreaccount1;TableEndpoint=http://127.0.0.1:11002/devstoreaccount1;"
+  },
+  "Comment_Database": "No connection string needed locally: the API uses the Docker PostgreSQL from compose.yaml (npm run db:up) on port 5433 and applies EF migrations on startup. Override with ConnectionStrings__Postgres if you must.",
+  "Comment_Storage": "AzureWebJobsStorage points at the Azurite emulator from compose.yaml (ports 11000-11002, not the 10000 defaults, so it never collides with another project). The account key above is Azurite's public well-known dev key, not a secret."
+}

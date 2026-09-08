@@ -1,0 +1,23 @@
+# Node
+node_modules/
+dist/
+*.local
+*.log
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Local AI assistant working files (per-developer, not shared)
+.claude/
+
+# Environment / local secrets
+.env
+.env.*
+api/local.settings.json
+
+# .NET build output
+**/bin/
+**/obj/

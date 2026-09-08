@@ -1,0 +1,42 @@
+# Local dev dependencies. Start with: docker compose up -d
+# LOCAL ONLY. Ports are deliberately non-default (5433, 11000-11002) so this stack never
+# collides with a locally installed Postgres or another project's emulator.
+services:
+  db:
+    image: postgres:17
+    container_name: minihub-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: minihub
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_DB: minihub
+    ports:
+      - "5433:5432"
+    volumes:
+      - minihub-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U minihub -d minihub"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Azure Storage emulator. The Functions host needs AzureWebJobsStorage; without it the
+  # host reports unhealthy and returns 503 for every request. Running it here keeps the
+  # local API reliably up.
+  #
+  # --skipApiVersionCheck: the Azure.Storage.Blobs SDK negotiates a newer service API
+  # version than Azurite recognises, and Azurite rejects the request outright rather than
+  # falling back. Real Azure supports the version, so this only relaxes the emulator's
+  # own guard.
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: minihub-azurite
+    restart: unless-stopped
+    command: azurite --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0 --skipApiVersionCheck
+    ports:
+      - "11000:10000"
+      - "11001:10001"
+      - "11002:10002"
+
+volumes:
+  minihub-pgdata:

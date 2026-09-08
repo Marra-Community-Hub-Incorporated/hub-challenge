@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  frontend:
+    name: Frontend (typecheck + tests + build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run test:frontend
+      - run: npm run build
+
+  backend:
+    name: Backend (.NET 10 build + tests)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 10.0.x
+      - name: Build API
+        run: dotnet build api/MiniHub.Api.csproj --configuration Release
+      - name: Build seed tool
+        run: dotnet build tools/Seed/MiniHub.Seed.csproj --configuration Release
+      - name: Test (incl. tenant isolation)
+        run: dotnet test api.Tests/MiniHub.Api.Tests.csproj --configuration Release
+
+  infra:
+    name: Infra (bicep build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: az bicep install
+      - run: az bicep build --file infra/main.bicep --stdout > /dev/null

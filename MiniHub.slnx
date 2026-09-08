@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/api.Tests/">
+    <Project Path="api.Tests/MiniHub.Api.Tests.csproj" />
+  </Folder>
+  <Folder Name="/api/">
+    <Project Path="api/MiniHub.Api.csproj" />
+  </Folder>
+  <Folder Name="/tools/" />
+  <Folder Name="/tools/Seed/">
+    <Project Path="tools/Seed/MiniHub.Seed.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,21 @@
+{
+  "name": "Mini Hub challenge",
+  "image": "mcr.microsoft.com/dotnet/sdk:10.0",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {}
+  },
+  "runArgs": ["--privileged"],
+  "postCreateCommand": "npm install -g azure-functions-core-tools@4 --unsafe-perm true && npm install && npm run setup",
+  "forwardPorts": [5173, 7071, 5433, 11000, 11001, 11002],
+  "portsAttributes": {
+    "5173": { "label": "Frontend (Vite)", "onAutoForward": "openPreview" },
+    "7071": { "label": "API (Azure Functions)" },
+    "5433": { "label": "Postgres" }
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["ms-dotnettools.csdevkit", "ms-azuretools.vscode-bicep"]
+    }
+  }
+}
