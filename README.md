@@ -23,9 +23,12 @@ It runs entirely on your own machine. No Azure account, no secrets, no login.
   Say so in the PR under "AI use", and be ready to explain every line you submit. In the
   follow-up call we will ask you to walk us through your changes and make one small
   change live, so it needs to be work you understand.
-- **Work in your own fork.** Do not open a pull request against this repository; open
-  it on your fork (`your-name/hub-challenge`, branch → `main`) and send us the link.
-  The PR template asks for everything we need.
+- **Work in your own private copy, not a fork.** A fork of this public repo is public
+  too, and we keep each person's work private. Click **Use this template** → **Create a
+  new repository**, set it to **Private**, then add the reviewer named in your invitation
+  email as a collaborator (Settings → Collaborators). Work on a branch, open the pull
+  request inside your copy (branch → `main`) and send us the link. Do not open a pull
+  request against this repository. The PR template asks for everything we need.
 - Commit style: small commits, plain readable messages, no secrets. Same as the Hub.
 - Questions are welcome: hello@marrahub.com.au. Asking a good question counts in your
   favour, not against.
@@ -112,7 +115,7 @@ Then pick **one** track. If you finish early, stop; do not start a second track.
 
 ## Track: QA
 
-- Write a one-page test plan for the registration flow (`docs/TEST_PLAN.md` in your fork).
+- Write a one-page test plan for the registration flow (`docs/TEST_PLAN.md` in your copy).
 - There are **at least three bugs** in this app beyond the time bug. Find as many as you
   can and report each one as a GitHub-issue-style report in your PR description:
   title, steps to reproduce, expected, actual, severity. Reports are scored on
